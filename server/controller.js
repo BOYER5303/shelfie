@@ -2,9 +2,10 @@ module.exports = {
     getProducts: (req, res, next) => {
         const db = req.app.get('db');
         
-        db.get_products().then(products => {
-            res.status(200).send(products)
+        db.get_products().then(product => {
+            res.status(200).send(product)
         }).catch(err => console.log(err))
+        console.log(products)
     },
     addProduct: (req, res, next) => {
         const db = req.app.get('db');
@@ -16,7 +17,7 @@ module.exports = {
     },
     // updateProduct: (req, res, next) => {
     //     const db=req.app.get('db');
-    //     db.update_product([req.body.email, req.params.id]).then(students => {
+    //     db.update_product([req.body.image, req.params.id]).then(students => {
     //         res.status(200).send(products)
     //     }).catch(err => console.log(err))
     // }

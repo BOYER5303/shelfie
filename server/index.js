@@ -1,5 +1,5 @@
 const express = require ('express');
-const {} = require('./controller');
+
 require('dotenv').config();
 const massive = require('massive');
 
@@ -8,15 +8,18 @@ const {getProducts, addProduct, updateProduct} = require('./controller');
 
 app.use(express.json());
 
-const {CONNECTION_STRING} = process.env;
+const {CONNECTION_STRING, SERVER_PORT} = process.env;
 
-massive({connectionString: CONNECTION_STRING, ssl: {rejectUnauthorized: false}});
+massive(CONNECTION_STRING).then( db => {
+    console.log('connected to db')
+    app.set('db', db)
+})
 
-app.get('/api/get_products', getProducts)
+app.get('/api/products', getProducts)
 app.post('/api/add_product', addProduct)
 //app.put('/api/update_product/:id', updateProduct)
 
 
-const port = 3001;
 
-app.listen(port, () => (console.log(`listening on port ${port}`)))
+
+app.listen(SERVER_PORT, () => (console.log(`listening on port ${SERVER_PORT}`)))

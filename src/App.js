@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Dashboard from './Component/Dashboard/Dashboard';
-import Form from './Component/Form/Form';
+import AddProduct from './Component/Form/Form';
 import Header from './Component/Header/Header'
 import './App.css';
 import { render } from '@testing-library/react';
@@ -11,25 +11,25 @@ class App extends React.Component {
   constructor(){
     super()
     this.state= {
-      products: [],
+      products: ["URL", "STUFF", 12],
       newImage: '',
       newProduct: '',
       newPrice: ''
     }
 
-    this.addProduct = this.addProduct.bind(this)
+    this.AddProduct = this.AddProduct.bind(this)
     this.imageHandler = this.imageHandler.bind(this)
     this.productHandler =this.productHandler.bind(this)
     this.priceHandler = this.priceHandler.bind(this)
   }
   componentDidMount(){
-    axios.get('/api/products').then.apply(res => {
+    axios.get('/api/products').then(res => {
       this.setState ({
         products: res.data
       })
     })
   }
-  addProduct(){
+  AddProduct(){
     axios.post('/api/add_product', {
       image: this.state.newImage,
       product: this.state.newProduct,
@@ -66,9 +66,12 @@ priceHandler(event){
   
   return (
     <div className="App">
+      <AddProduct AddProduct={this.AddProduct} imageHandler={this.imageHandler} 
+      productHandler={this.productHandler} priceHandler={this.priceHandler} 
+      />
       <Header/>
       <Dashboard/>
-      <Form/>
+      
         
     </div>
   );

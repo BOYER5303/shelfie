@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default class Form extends React.Component{
+export default class AddProduct extends React.Component{
     
     render(){
         return(
@@ -35,7 +35,7 @@ export default class Form extends React.Component{
                 />
                 
             
-                <button className="myButton" onClick={this.props.Form}>Add to Inventory</button>
+                <button className="myButton" onClick={this.props.AddProduct}>Add to Inventory</button>
             </div>
         )
     }
